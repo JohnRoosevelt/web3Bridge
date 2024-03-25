@@ -11,7 +11,9 @@ export default function BridgeTransfer() {
   let data = {
     assets: []
   }
-  let fee = false
+  let fee = {
+    nativeFee: 0
+  }
   let selectedNFT = ''
   let approved = false
   function onSelectFrom() { }
@@ -62,7 +64,7 @@ export default function BridgeTransfer() {
     <div className="w-full text-normal mt-10 flex items-center space-x-2">
       <img src="./gas.svg" alt="" />
       <span>Estimated gas fees </span>
-      <span className="text-[#11E095]">{fee ? new Number(formatEther(fee.nativeFee)).toFixed(6) : "--"} ETH</span>
+      <span className="text-[#11E095]">{(fee && false) ? new Number(formatEther(fee.nativeFee)).toFixed(6) : "--"} ETH</span>
     </div>
 
     <div className={`w-full h-12 flex justify-center items-center font-bold text-xl text-[#11E095] border-[#11E095] clickableBorder`}>
