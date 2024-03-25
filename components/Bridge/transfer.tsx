@@ -7,7 +7,9 @@ import {
 import { Button } from "@nextui-org/react";
 
 export default function BridgeTransfer() {
-  let data = {}
+  let data = {
+    assets: []
+  }
   let fee = ''
   let selectedNFT = ''
   let approved = ''
@@ -27,7 +29,7 @@ export default function BridgeTransfer() {
       <div className={`w-full line`} />
       <div className="px-[26px] py-2 w-full text-sm flex justify-between items-center">
         <div className="opacity-[.45]">Choose an NFT to bridge</div>
-        <div>Available NFTs: {data?.assets?.length}</div>
+        <div>Available NFTs: {data.assets?.length}</div>
       </div>
       <div className={`w-full line`} />
       <div className="w-full p-[26px] flex justify-between items-center">
