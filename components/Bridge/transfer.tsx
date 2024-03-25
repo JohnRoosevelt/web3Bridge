@@ -5,14 +5,15 @@ import {
   CHAINS_WITH_NFT_SUPPORT,
 } from "../../utils/consts";
 import { Button } from "@nextui-org/react";
+import { formatEther } from "ethers";
 
 export default function BridgeTransfer() {
   let data = {
     assets: []
   }
-  let fee = ''
+  let fee = false
   let selectedNFT = ''
-  let approved = ''
+  let approved = false
   function onSelectFrom() { }
   function onSelectNFT() { }
   function onSelectTo() { }
