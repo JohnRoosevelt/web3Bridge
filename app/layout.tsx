@@ -1,10 +1,9 @@
-// 'use client'
 import type { Metadata } from "next";
 import { biz } from "./fonts";
 import "./globals.css";
 import Header from "./Header";
-
-import {Providers} from "./providers";
+import { UiProvider } from "@/context/uiProvider";
+import { Web3ContextProvider } from "@/context/web3Provider";
 
 export const metadata: Metadata = {
   title: "NFT-zero",
@@ -21,10 +20,12 @@ export default function RootLayout({
     <html lang="en">
       {/* <body className={inter.className} className="flex"> */}
       <body className={`flex flex-col dark text-foreground bg-background ${biz.className}`}>
-        <Providers>
+        <UiProvider>
           <Header></Header>
-          <main className="w-[1440px] flex flex-col flex-1">{children}</main>
-        </Providers>
+          <Web3ContextProvider>
+            <main className="w-[1440px] flex flex-col flex-1">{children}</main>
+          </Web3ContextProvider>
+        </UiProvider>
       </body>
     </html>
   );

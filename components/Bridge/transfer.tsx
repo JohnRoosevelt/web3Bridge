@@ -1,13 +1,12 @@
 
 import ChainSelect from '../ChainSelect'
 import './bridge.scss'
-import {
-  CHAINS_WITH_NFT_SUPPORT,
-} from "../../utils/consts";
 import { Button } from "@nextui-org/react";
 import { formatEther } from "ethers";
+import { useWeb3Context } from "@/context/web3Provider";
 
 export default function BridgeTransfer() {
+  const { FromChinas, TargetChinas } = useWeb3Context()
   let data = {
     assets: []
   }
@@ -24,7 +23,7 @@ export default function BridgeTransfer() {
   return <div className="w-[640px] flex flex-col justify-between items-center">
     <div className={`w-full  flex flex-col justify-between items-center border-24`}>
       <div className="flex justify-between items-center w-full px-[26px] py-4">
-        <ChainSelect chains={CHAINS_WITH_NFT_SUPPORT} label={'Source From'} />
+        <ChainSelect label={'Source From'} chains={FromChinas} />
         <Button color="primary">
           connect wallet
         </Button>
@@ -52,7 +51,7 @@ export default function BridgeTransfer() {
     </div>
 
     <div className={`flex justify-between items-center px-[26px] py-4 w-full border-24`}>
-      <ChainSelect chains={CHAINS_WITH_NFT_SUPPORT} label={'Target To'} />
+      <ChainSelect label={'Target To'} chains={TargetChinas} />
       <Button isDisabled color="primary">
         connect wallet
       </Button>

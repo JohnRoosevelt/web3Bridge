@@ -1,11 +1,11 @@
 'use client'
 
 import { Select, SelectItem, Avatar } from "@nextui-org/react";
-import { wormhole } from "@wormhole-foundation/sdk";
-import evm from "@wormhole-foundation/sdk/evm";
-import solana from "@wormhole-foundation/sdk/solana";
+import { useWeb3Dispatch } from "@/context/web3Provider";
 
-export default function App({ chains, label }) {
+
+export default function ChainSelect({ label, chains }) {
+  const dispatch = useWeb3Dispatch()
   return (
     <Select
       label={label}
@@ -56,17 +56,28 @@ export default function App({ chains, label }) {
       }}
       onChange={async (e) => {
         console.log('abc', e.target.value)
-        const wh = await wormhole("Testnet", [solana], {
-          chains: {
-            Solana: {
-              contracts: {
-                coreBridge: "11111111111111111111111111111",
-              },
-              rpc: "https://api.devnet.solana.com",
-            },
-          },
-        });
-        console.log(wh)
+        let type = ''
+        if (label === 'Source From') {
+          type = 'onPickedFrom'
+        }
+
+        if (label === 'Target To') {
+          type = 'onPickedTarget'
+        }
+        dispatch({type, chainId: Number(e.target.value)})
+      }}
+      onOpenChange={async (isOpen) => {
+        console.log('select', label, { isOpen })
+        if (!isOpen) return
+        let type = ''
+        if (label === 'Source From') {
+          type = 'onSelectFrom'
+        }
+
+        if (label === 'Target To') {
+          type = 'onSelectTarget'
+        }
+        dispatch({type})
       }}
     >
       {(chain) => (
